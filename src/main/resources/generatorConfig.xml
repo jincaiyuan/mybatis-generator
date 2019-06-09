@@ -8,25 +8,25 @@
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="your connection url"
+                        connectionURL="jdbc:mysql://192.168.234.128:3306/mybatis"
                         userId="root"
-                        password="root">
+                        password="190227">
         </jdbcConnection>
 
         <javaTypeResolver >
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="tk.mybatis.simple.model" targetProject="src\main\java">
+        <javaModelGenerator targetPackage="template.model" targetProject="src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="SysUserMapper.xml"  targetProject="src\main\java">
+        <sqlMapGenerator targetPackage="sqlMapper"  targetProject="src\main\resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMapper" targetPackage="tk.mybatis.simple.mapper"  targetProject="src\main\java">
+        <javaClientGenerator type="XMLMapper" targetPackage="template.mapper"  targetProject="src\main\java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
