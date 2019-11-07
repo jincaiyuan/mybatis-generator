@@ -4,35 +4,40 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="C:/Users/Administrator/.m2/repository/mysql/mysql-connector-java/8.0.13/mysql-connector-java-8.0.13.jar" />
+    <classPathEntry location="C:/Users/Paul/.m2/repository/mysql/mysql-connector-java/8.0.13/mysql-connector-java-8.0.13.jar" />
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.234.128:3306/mybatis"
+                        connectionURL="jdbc:mysql://localhost:3306/clouddb?serverTimezone=UTC"
                         userId="root"
-                        password="190227">
+                        password="root">
         </jdbcConnection>
 
         <javaTypeResolver >
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="template.model" targetProject="src\main\java">
+        <!-- This is the location of model/entity class. You should not change the targetProject and just change
+             the targetPackage-->
+        <javaModelGenerator targetPackage="com.example.deptcloud.entity" targetProject="src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="sqlMapper"  targetProject="src\main\resources">
+        <!-- This is configuration of the xml file for mybatis mapper. Just change the targetPackage -->
+        <sqlMapGenerator targetPackage="mybatis/mapper"  targetProject="src\main\resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMapper" targetPackage="template.mapper"  targetProject="src\main\java">
+        <!-- This is the configuration of mapper interface -->
+        <javaClientGenerator type="XMLMapper" targetPackage="com.example.dept.dao"  targetProject="src\main\java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="sys_user" domainObjectName="SysUser" enableCountByExample="false"
+        <!-- The target table -->
+        <table tableName="dept" domainObjectName="Department" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-
+            <generatedKey column="deptno" sqlStatement="mysql" identity="true"></generatedKey>
         </table>
 
     </context>
